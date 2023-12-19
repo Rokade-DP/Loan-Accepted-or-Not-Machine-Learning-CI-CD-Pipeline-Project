@@ -1,0 +1,12 @@
+prefix=d:/Data_Science_Project/Loan-Accepted-or-Not-Machine-Learning-CI-CD-Pipeline-Project/env/Library
+exec_prefix=d:/Data_Science_Project/Loan-Accepted-or-Not-Machine-Learning-CI-CD-Pipeline-Project/env/Library
+libdir=d:/Data_Science_Project/Loan-Accepted-or-Not-Machine-Learning-CI-CD-Pipeline-Project/env/Library/lib
+includedir=d:/Data_Science_Project/Loan-Accepted-or-Not-Machine-Learning-CI-CD-Pipeline-Project/env/Library/include
+
+Name: libzmq
+Description: 0MQ c++ library
+Version: 4.3.4
+Libs: -L${libdir} -lzmq
+Libs.private: -lstdc++ 
+Requires.private: 
+Cflags: -I${includedir} 
