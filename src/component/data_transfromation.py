@@ -30,10 +30,28 @@ class DataTransformation:
 
             logging.info(" Data Transformation Started")
 
-            numerical_features = ['age', 'workclass',  'education_num', 'marital_status',
-            'occupation', 'relationship', 'race', 'sex', 'capital_gain',
-            'capital_loss', 'hours_per_week', 'native_country']
-# age = 2,5,78, 32, 56, 
+            numerical_features = ['Gender',
+                            'Married',
+                            'Dependents',
+                            'Education',
+                            'Self_Employed',
+                            'ApplicantIncome',
+                            'CoapplicantIncome',
+                            'LoanAmount',
+                            'Loan_Amount_Term',
+                            'Credit_History',
+                            'Property_Area',
+                            'Loan_Status']
+
+            categorical_features = ['Loan_ID',
+                                'Gender',
+                                'Married',
+                                'Dependents',
+                                'Education',
+                                'Self_Employed',
+                                'Property_Area',
+                                'Loan_Status']
+
             num_pipeline = Pipeline(
                 steps = [
                 ("imputer", SimpleImputer(strategy = 'median')),
@@ -42,11 +60,19 @@ class DataTransformation:
                 
                 ]
             )
+             # Categorigal Pipeline
+            cat_pipeline=Pipeline(
+                steps=[
+                ('imputer',SimpleImputer(strategy='most_frequent')),
+                ('ordinalencoder',OrdinalEncoder(categories=[cut_categories,color_categories,clarity_categories])),
+                ('scaler',StandardScaler())
+                ]
 
-            preprocessor = ColumnTransformer([
-                ("num_pipeline", num_pipeline, numerical_features)
+            )
+            preprocessor = preprocessor=ColumnTransformer([
+            ('num_pipeline',num_pipeline,numerical_cols),
+            ('cat_pipeline',cat_pipeline,categorical_cols)
             ])
-
             return preprocessor
 
 
@@ -78,9 +104,18 @@ class DataTransformation:
             train_data = pd.read_csv(train_path)
             test_data = pd.read_csv(test_path)
 
-            numerical_features = ['age', 'workclass',  'education_num', 'marital_status',
-            'occupation', 'relationship', 'race', 'sex', 'capital_gain',
-            'capital_loss', 'hours_per_week', 'native_country']
+            numerical_features = ['Gender',
+                            'Married',
+                            'Dependents',
+                            'Education',
+                            'Self_Employed',
+                            'ApplicantIncome',
+                            'CoapplicantIncome',
+                            'LoanAmount',
+                            'Loan_Amount_Term',
+                            'Credit_History',
+                            'Property_Area',
+                            'Loan_Status']
 
 
             for col in numerical_features:
